@@ -37,7 +37,7 @@ async def check_Spotify_accesstoken(user_id: int):
     collection = db['USERS']
     status = await collection.find_one({'USER_ID': user_id}, {'SPOTIFY': 1})
     print(status)
-    return status
+    return status['SPOTIFY']
 
 async def vodlist_spotify(user_id: int):
     collection = db['recommend_list']
