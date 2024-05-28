@@ -1,0 +1,14 @@
+/.venv
+/app/__pycache__
+/app/.env
+/app/model/__pycache__
+/app/routes/mainpage/__pycache__
+/app/routes/detailpage/__pycache__
+/app/routes/detailpage/routes/series/__pycache__
+/app/routes/detailpage/routes/series/season/__pycache__
+/app/routes/detailpage/routes/series/season/episode/__pycache__
+/app/routes/detailpage/routes/kids/__pycache__
+/app/routes/detailpage/routes/kids/season/__pycache__
+/app/routes/detailpage/routes/kids/season/episode/__pycache__
+/app/routes/login/__pycache__
+/app/routes/user/__pycache__
