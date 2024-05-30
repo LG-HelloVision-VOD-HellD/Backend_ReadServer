@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 import urllib.parse
-from model.connection import mongodb
+from app.model.connection import mongodb
 
 client = mongodb.get_client()
 db = client['hellody']
