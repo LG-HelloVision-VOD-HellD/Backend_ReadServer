@@ -50,7 +50,7 @@ jobs:
       - name: AWS 자격 증명 설정
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::730335352929:role/fastapicicid
+          role-to-assume: arn:aws:iam::730335352929:role/semin
           role-session-name: sampleSessionName
           aws-region: ap-northeast-2
 
