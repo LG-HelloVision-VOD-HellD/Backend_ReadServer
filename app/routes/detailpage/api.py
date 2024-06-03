@@ -14,4 +14,4 @@ async def vod_detailpage(vod_id: int):
         return result
     else:
         raise HTTPException(status_code=400, detail='error')
-    
+
