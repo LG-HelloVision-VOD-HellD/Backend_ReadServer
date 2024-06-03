@@ -10,6 +10,7 @@ async def vod_detail(vod_id):
         vod_type = vod_type['TYPE']
         vod_type = vod_types[vod_type]
         print(vod_type)
+        #배우 프로필 추가
         collection = db[vod_type]
         detail_vod = await collection.find_one({'VOD_ID':vod_id}, {'_id': 0})
         if vod_type == 'MOVIES':
@@ -17,6 +18,8 @@ async def vod_detail(vod_id):
             cursor = actor_collection.find({'MOVIE_ID':detail_vod['MOVIE_ID']}, {'_id':0, 'ACTOR_NAME':1,'PROFILE':1})
             actor = await cursor.to_list(length=100)
             detail_vod['ACTOR'] = actor
+        print()
+        #리뷰 정보 넣기
         review_collection = db['REVIEW']
         cursor = review_collection.find({'VOD_ID':vod_id}, {'_id':0, 'USER_ID':1, 'RATING':1, 'COMMENT':1, 'M_DATE':1})
         review_lists = await cursor.to_list(length=100)
@@ -25,8 +28,15 @@ async def vod_detail(vod_id):
             user_name = await user_collection.find_one({'USER_ID':review_list['USER_ID']}, {'_id':0, 'USER_NAME':1})
             review_list["USER_NAME"] = user_name["USER_NAME"]
         detail_vod['review'] = review_lists
+
+        #해당 관련 VOD 추천 VOD 목록
+        cursor = collection.find({'GENRE': detail_vod['GENRE']}, {'_id':0, 'VOD_ID':1, 'TITLE':1, 'POSTER':1})
+        recommend_vod = await cursor.to_list(length=100)
+        detail_vod['recommend_list'] = recommend_vod
+
         print(detail_vod)
         return detail_vod
+    
     except:
         return False
     #collection = db['VOD']

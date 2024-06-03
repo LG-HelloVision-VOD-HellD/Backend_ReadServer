@@ -7,6 +7,7 @@ from .routes.user.api import router as user_router
 from .routes.login.api import router as login_router
 from .routes.like.api import router as like_router
 from .routes.review.api import router as review_router
+from .routes.search.api import router as search_router
 app = FastAPI()
 
 app.add_middleware(
@@ -23,6 +24,7 @@ app.include_router(user_router)
 app.include_router(login_router)
 app.include_router(like_router)
 app.include_router(review_router)
+app.include_router(search_router)
 @app.get('/')
 async def index():
     return "hellody read-server"
