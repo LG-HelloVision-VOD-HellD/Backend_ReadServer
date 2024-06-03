@@ -17,6 +17,14 @@ async def vod_detail(vod_id):
             cursor = actor_collection.find({'MOVIE_ID':detail_vod['MOVIE_ID']}, {'_id':0, 'ACTOR_NAME':1,'PROFILE':1})
             actor = await cursor.to_list(length=100)
             detail_vod['ACTOR'] = actor
+        review_collection = db['REVIEW']
+        cursor = review_collection.find({'VOD_ID':vod_id}, {'_id':0, 'USER_ID':1, 'RATING':1, 'COMMENT':1, 'M_DATE':1})
+        review_lists = await cursor.to_list(length=100)
+        for review_list in review_lists:
+            user_collection = db['USERS']
+            user_name = await user_collection.find_one({'USER_ID':review_list['USER_ID']}, {'_id':0, 'USER_NAME':1})
+            review_list["USER_NAME"] = user_name["USER_NAME"]
+        detail_vod['review'] = review_lists
         print(detail_vod)
         return detail_vod
     except:

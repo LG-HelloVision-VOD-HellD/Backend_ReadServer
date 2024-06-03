@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from .fuc import check_Spotify_accesstoken, vodlist_spotify, vodlist_youtube, vodlist_watch, login
+from .fuc import check_Spotify_accesstoken, vodlist_spotify, vodlist_youtube, vodlist_watch
 
 router = APIRouter(prefix='/mainpage')
 
