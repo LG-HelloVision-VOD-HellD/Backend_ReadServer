@@ -13,7 +13,7 @@ async def review_list(user_id: int):
     else:
         raise HTTPException(status_code=400, detail='error')
     
-@router.get('/{user_id}/detail')
+@router.get('/{user_id}/{review_id}')
 async def review_detail(user_id: int, review_id: int):
     result = await get_review_detail(user_id, review_id)
     if result:
