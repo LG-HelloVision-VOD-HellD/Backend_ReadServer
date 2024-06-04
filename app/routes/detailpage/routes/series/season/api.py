@@ -10,7 +10,7 @@ router.include_router(series_episode_router)
 async def series_season(series_id: int):
     result = await season_detail(series_id)
     if result:
-        return result[0]
+        return result
     else:
         raise HTTPException(status_code=400, detail='error')
     
