@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
+
 from .routes.mainpage.api import router as mainpage_router
+
 from .routes.detailpage.api import router as detailpage_router
 from .routes.user.api import router as user_router
 from .routes.login.api import router as login_router
