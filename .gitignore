@@ -3,6 +3,10 @@
 /.env
 /app/model/__pycache__
 /app/routes/mainpage/__pycache__
+/app/routes/mainpage/routes/__pycache__
+/app/routes/mainpage/routes/movie/__pycache__
+/app/routes/mainpage/routes/kids/__pycache__
+/app/routes/mainpage/routes/series/__pycache__
 /app/routes/detailpage/__pycache__
 /app/routes/detailpage/routes/series/__pycache__
 /app/routes/detailpage/routes/series/season/__pycache__
