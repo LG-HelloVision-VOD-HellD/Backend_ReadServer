@@ -3,32 +3,99 @@ from app.model.connection import mongodb
 
 client = mongodb.get_client()
 db = client['hellody']
+collection = db['MOVIES']
 
 
-
-async def check_Spotify_accesstoken(user_id: int):
-    collection = db['USERS']
-    status = await collection.find_one({'USER_ID': user_id}, {'SPOTIFY': 1})
-    print(status)
-    return status['SPOTIFY']
-
-async def vodlist_spotify(user_id: int):
-    collection = db['recommend_list']
-    cursor = collection.find({'user_id': user_id}, {'_id': 0, 'spotify': 1})
+async def sf_fantasy():
+    cursor = collection.find(
+        {
+            '$or': [
+                {'GENRE': {'$regex': '^SF'}},
+                {'GENRE': {'$regex': '^판타지'}},
+                {'GENRE': {'$regex': '^미스터리'}}
+            ]
+        },
+        {'_id': 0, 'VOD_ID': 1, 'TITLE': 1, 'POSTER': 1}
+    )
     vod_list = await cursor.to_list(length=100)
-    print(vod_list)
     return vod_list
 
-async def vodlist_youtube(user_id: int):
-    collection = db['recommend_list']
-    cursor = collection.find({'user_id': user_id}, {'_id': 0, 'youtube': 1})
+
+async def liberal_others():
+    cursor = collection.find(
+        {
+            '$or': [
+                {'GENRE': {'$regex': '^TV영화'}},
+                {'GENRE': {'$regex': '^다큐멘터리'}},
+                {'GENRE': {'$regex': '^서부'}},
+                {'GENRE': {'$regex': '^역사'}}
+            ]
+        },
+        {'_id': 0, 'VOD_ID': 1, 'TITLE': 1, 'POSTER': 1}
+    )
     vod_list = await cursor.to_list(length=100)
-    print(vod_list)
     return vod_list
 
-async def vodlist_watch(user_id: int):
-    collection = db['recommend_list']
-    cursor = collection.find({'user_id': user_id}, {'_id': 0, 'watch': 1})
+async def family():
+    cursor = collection.find(
+        {
+            '$or': [
+                {'GENRE': {'$regex': '^가족'}},
+                {'GENRE': {'$regex': '^코미디'}}
+            ]
+        },
+        {'_id': 0, 'VOD_ID': 1, 'TITLE': 1, 'POSTER': 1}
+    )
     vod_list = await cursor.to_list(length=100)
-    print(vod_list)
+    return vod_list
+
+async def drama():
+    cursor = collection.find(
+        {
+            '$or': [
+                {'GENRE': {'$regex': '^드라마'}},
+                {'GENRE': {'$regex': '^음악'}}
+            ]
+        },
+        {'_id': 0, 'VOD_ID': 1, 'TITLE': 1, 'POSTER': 1}
+    )
+    vod_list = await cursor.to_list(length=100)
+    return vod_list
+
+async def romance():
+    cursor = collection.find(
+        {
+            '$or': [
+                {'GENRE': {'$regex': '^로맨스'}}
+            ]
+        },
+        {'_id': 0, 'VOD_ID': 1, 'TITLE': 1, 'POSTER': 1}
+    )
+    vod_list = await cursor.to_list(length=100)
+    return vod_list
+
+async def action():
+    cursor = collection.find(
+        {
+            '$or': [
+                {'GENRE': {'$regex': '^액션'}},
+                {'GENRE': {'$regex': '^모험'}},
+                {'GENRE': {'$regex': '^전쟁'}}
+            ]
+        },
+        {'_id': 0, 'VOD_ID': 1, 'TITLE': 1, 'POSTER': 1}
+    )
+    vod_list = await cursor.to_list(length=100)
+    return vod_list
+
+async def animations():
+    cursor = collection.find(
+        {
+            '$or': [
+                {'GENRE': {'$regex': '^애니메이션'}}
+            ]
+        },
+        {'_id': 0, 'VOD_ID': 1, 'TITLE': 1, 'POSTER': 1}
+    )
+    vod_list = await cursor.to_list(length=100)
     return vod_list

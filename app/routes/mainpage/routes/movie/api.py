@@ -1,39 +1,62 @@
 from fastapi import APIRouter, HTTPException
 
-from .fuc import check_Spotify_accesstoken, vodlist_spotify, vodlist_youtube, vodlist_watch
+from .fuc import sf_fantasy, liberal_others, family, drama, romance, action, animations
 
 router = APIRouter(prefix='/movie')
 
-@router.get('/spotify/{user_id}')
-async def magepage_spotify_list(user_id: int):
+@router.get('/SF-fantasy')
+async def magepage_SF_fantasy_list():
     try:
-        if await check_Spotify_accesstoken(user_id):
-            data = await vodlist_spotify(user_id)
-            result = {
-                'status': True,
-                'response': data[0]['spotify']
-            }
-            return result
-        else: 
-            result = {
-                'status': False
-            }
-            return result
+        data = await sf_fantasy()
+        return data
+
     except:
         raise HTTPException(status_code=400, detail='error')
 
-@router.get('/youtube/{user_id}')
-async def magepage_youtude_list(user_id: int):
+@router.get('/Liberal-Arts-Others')
+async def magepage_Liberal_Others_list():
     try:
-        data = await vodlist_youtube(user_id)
-        return data[0]['youtube']
+        data = await liberal_others()
+        return data
     except: 
         raise HTTPException(status_code=400, detail='error')
     
-@router.get('/watch/{user_id}')
-async def magepage_watch_list(user_id: int):
+@router.get('/family')
+async def magepage_family_list():
     try:
-        data = await vodlist_watch(user_id)
-        return data[0]['watch']
+        data = await family()
+        return data
+    except: 
+        raise HTTPException(status_code=400, detail='error')
+    
+@router.get('/drama')
+async def magepage_drama_list():
+    try:
+        data = await drama()
+        return data
+    except: 
+        raise HTTPException(status_code=400, detail='error')
+    
+@router.get('/romance')
+async def magepage_romance_list(user_id: int):
+    try:
+        data = await romance()
+        return data
+    except: 
+        raise HTTPException(status_code=400, detail='error')
+
+@router.get('/action')
+async def magepage_action_list():
+    try:
+        data = await action()
+        return data
+    except: 
+        raise HTTPException(status_code=400, detail='error')
+    
+@router.get('/animations')
+async def magepage_watch_list():
+    try:
+        data = await animations()
+        return data
     except: 
         raise HTTPException(status_code=400, detail='error')
