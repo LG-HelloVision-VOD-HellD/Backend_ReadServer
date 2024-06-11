@@ -49,6 +49,20 @@ async def family():
     vod_list = await cursor.to_list(length=100)
     return vod_list
 
+async def honor():
+    cursor = collection.find(
+        {
+            '$or': [
+                {'GENRE': {'$regex': '^공포'}},
+                {'GENRE': {'$regex': '^범죄'}},
+                {'GENRE': {'$regex': '^스릴러'}}
+            ]
+        },
+        {'_id': 0, 'VOD_ID': 1, 'TITLE': 1, 'POSTER': 1}
+    )
+    vod_list = await cursor.to_list(length=100)
+    return vod_list
+
 async def drama():
     cursor = collection.find(
         {
