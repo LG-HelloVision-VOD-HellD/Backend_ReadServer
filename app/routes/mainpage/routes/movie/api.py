@@ -29,7 +29,7 @@ async def movie_family_list():
     except: 
         raise HTTPException(status_code=400, detail='error')
 
-@router.get('/honor')
+@router.get('/horror')
 async def movie_honor_list():
     try:
         data = await honor()
