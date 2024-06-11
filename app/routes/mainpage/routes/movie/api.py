@@ -46,7 +46,7 @@ async def movie_drama_list():
         raise HTTPException(status_code=400, detail='error')
     
 @router.get('/romance')
-async def movie_romance_list(user_id: int):
+async def movie_romance_list():
     try:
         data = await romance()
         return data
