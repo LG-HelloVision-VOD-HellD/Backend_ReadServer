@@ -7,9 +7,9 @@ router = APIRouter(prefix='/detailpage')
 router.include_router(series_router)
 router.include_router(kids_router)
 
-@router.get('/vod_detail/{vod_id}')
-async def vod_detailpage(vod_id: int):
-    result = await vod_detail(vod_id)
+@router.get('/vod_detail/{vod_id}/{user_id}')
+async def vod_detailpage(vod_id: int, user_id:int):
+    result = await vod_detail(vod_id, user_id)
     if result:
         return result
     else:
