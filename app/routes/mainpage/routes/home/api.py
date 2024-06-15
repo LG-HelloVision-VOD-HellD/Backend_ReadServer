@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from .fuc import check_Spotify_accesstoken, vodlist_spotify, vodlist_youtube, vodlist_watch, vodlist_spotify_firstuser
+from .fuc import check_Spotify_accesstoken, vodlist_spotify, vodlist_youtube, vodlist_watch, vodlist_rating, vodlist_spotify_firstuser
 
 router = APIRouter(prefix='/home')
 
@@ -43,5 +43,13 @@ async def magepage_watch_list(user_id: int):
     try:
         data = await vodlist_watch(user_id)
         return data[0]['watch']
+    except: 
+        raise HTTPException(status_code=400, detail='error')
+    
+@router.get('/rating/{user_id}')
+async def magepage_rating_list(user_id: int):
+    try:
+        data = await vodlist_rating(user_id)
+        return data[0]['rating']
     except: 
         raise HTTPException(status_code=400, detail='error')

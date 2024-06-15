@@ -33,6 +33,13 @@ async def vodlist_watch(user_id: int):
     print(vod_list)
     return vod_list
 
+async def vodlist_rating(user_id: int):
+    collection = db['recommend_list']
+    cursor = collection.find({'user_id': user_id}, {'_id': 0, 'rating': 1})
+    vod_list = await cursor.to_list(length=100)
+    print(vod_list)
+    return vod_list
+
 async def vodlist_spotify_firstuser(user_id: int):
     try:
         spotify_collection = db['SPOTIFY']
