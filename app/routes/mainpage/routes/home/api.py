@@ -9,7 +9,7 @@ async def magepage_spotify_list(user_id: int):
     try:
         if await check_Spotify_accesstoken(user_id):
             data = await vodlist_spotify(user_id)
-            if data:
+            if data[0]['spotify'] != []:
                 result = {
                     'status': True,
                     'response': data[0]['spotify']
